@@ -2,6 +2,7 @@ package com.kb_app.keijou_benzei_app.utility;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

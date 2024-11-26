@@ -8,7 +8,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.LoginController">
    <children>
       <VBox alignment="CENTER" prefHeight="105.0" prefWidth="440.0">
@@ -30,9 +29,16 @@
             <Font name="Eras Demi ITC" size="29.0" />
          </font>
       </Text>
-      <TextField fx:id="username" />
-      <PasswordField fx:id="password" />
-      <Button mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+      <VBox prefHeight="50.0" prefWidth="388.0" spacing="30.0">
+         <children>
+            <TextField fx:id="usernameField" />
+            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="385.0" />
+         </children>
+      </VBox>
+      <Button mnemonicParsing="false" onAction="#handleLogin" scaleX="1.5" scaleY="1.5" text="Login">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></Button>
    </children>
    <padding>
       <Insets left="80.0" right="80.0" />
