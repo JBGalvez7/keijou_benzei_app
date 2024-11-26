@@ -1,5 +1,6 @@
 package com.kb_app.keijou_benzei_app;
 
+import com.kb_app.keijou_benzei_app.utility.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
+        //(new Database()).generateUser("Chuj2117", "211713");
         launch();
     }
 }
