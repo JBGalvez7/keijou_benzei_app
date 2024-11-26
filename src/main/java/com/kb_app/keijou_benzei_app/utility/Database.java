@@ -20,8 +20,20 @@ public class Database {
         }
     }
 
+
     public Connection getConnection() {
         return connection;
+    }
+
+    public void close(){
+        if (connection != null){
+            try{
+                connection.close();
+                System.out.println("Disconnected from the database");
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void generateUser(String username, String password){
