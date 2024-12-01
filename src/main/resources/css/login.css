@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&display=swap');
+.login-button {
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
 
-.root{
-	-fx-font-family: 'Edu Australia VIC WA NT Hand Arrows';
+.login-button:hover {
+    -fx-background-color: #45a049;
 }

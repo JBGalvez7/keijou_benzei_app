@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="20.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #e8f5e9, #81c784);" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.BuyerController">
+    <children>
+        <!-- Header -->
+        <Text text="Buyer Panel" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+        <!-- Buttons -->
+        <Button text="Orders" onAction="#viewOrders" styleClass="buyer-button" />
+        <Button text="Messages" onAction="#viewMessages" styleClass="buyer-button" />
+        <Button text="Browse" onAction="#browseProducts" styleClass="buyer-button" />
+    </children>
+    <padding>
+        <Insets top="30" bottom="30" left="40" right="40" />
+    </padding>
+</VBox>
