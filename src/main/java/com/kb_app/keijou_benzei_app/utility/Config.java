@@ -5,9 +5,9 @@ public class Config {
 
     public static final String DB_PORT = "3306";
 
-    public static final String DB_USER = "joules";
+    public static final String DB_USER = "root";
 
-    public static final String DB_PASS = "galj#05839";
+    public static final String DB_PASS = "";
 
     public static final String DB_NAME = "kb_app_db";
 }

@@ -32,7 +32,7 @@ public class LoginController {
         if (isValidLogin(username, password)) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/buyerseller.fxml"));
-                Scene buyerSellerScene = new Scene(fxmlLoader.load());
+                Scene buyerSellerScene = new Scene(fxmlLoader.load(), 420, 350);
 
                 Stage currentStage = (Stage) usernameField.getScene().getWindow();
                 currentStage.setScene(buyerSellerScene);
@@ -41,7 +41,7 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            errorMessage.setText("Invalid Username/Password, try again.");
+            errorMessage.setText("INVALID USERNAME OR PASSWORD. TRY AGAIN");
         }
     }
 

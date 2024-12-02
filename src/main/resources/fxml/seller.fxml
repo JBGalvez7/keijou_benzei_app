@@ -8,6 +8,7 @@
 
 <VBox alignment="CENTER" spacing="20.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #e3f2fd, #64b5f6);" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
     <children>
+        <Button text="Go Back" layoutX="50" layoutY="50" onAction="#handleBack" />
         <Text text="Seller Panel" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
         <Text text="Today's Earnings: $0.00" style="-fx-font-size: 18px;" />
         <Button text="Earning History" onAction="#viewEarningHistory" styleClass="seller-button" />
