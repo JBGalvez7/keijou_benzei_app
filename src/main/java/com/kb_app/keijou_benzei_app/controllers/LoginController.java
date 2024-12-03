@@ -36,17 +36,17 @@ public class LoginController {
 
                 Stage currentStage = (Stage) usernameField.getScene().getWindow();
                 currentStage.setScene(buyerSellerScene);
-                currentStage.setTitle("Buyer or Seller");
+                currentStage.setTitle("Buyer/Seller Selection");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            errorMessage.setText("INVALID USERNAME OR PASSWORD. TRY AGAIN");
+            errorMessage.setText("Invalid Username or Password. Try Again");
         }
     }
 
     private boolean isValidLogin(String username, String password) {
-        return username.equals("Chuj2117") && password.equals("211713");
+        return username.equals("user") && password.equals("1234");
     }
 }
 

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="20.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #e3f2fd, #64b5f6);" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
+<VBox alignment="CENTER" prefHeight="555.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #7FFFD4, #00FFFF, #0000FF);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
     <children>
-        <Button text="Go Back" layoutX="50" layoutY="50" onAction="#handleBack" />
-        <Text text="Seller Panel" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
-        <Text text="Today's Earnings: $0.00" style="-fx-font-size: 18px;" />
-        <Button text="Earning History" onAction="#viewEarningHistory" styleClass="seller-button" />
-        <Button text="Products" onAction="#viewProducts" styleClass="seller-button" />
+        <Button layoutX="50" layoutY="50" onAction="#handleBack" text="Back" textFill="RED" translateX="-185.0" translateY="-150.0" />
+        <Text style="-fx-font-size: 24px; -fx-font-weight: bold;" text="KEIJOU BENKEI CREATOR CENTER PANEL" textAlignment="CENTER" translateY="-80.0" wrappingWidth="356.4453125">
+         <font>
+            <Font name="Eras Bold ITC" size="26.0" />
+         </font></Text>
+        <Text style="-fx-font-size: 18px;" text="Today's Earnings: $0.00" translateY="-80.0" />
+        <Button onAction="#viewEarningHistory" styleClass="seller-button" text="Earning History" translateY="-50.0" />
+        <Button onAction="#viewProducts" prefHeight="25.0" prefWidth="100.0" styleClass="seller-button" text="Products" translateY="-50.0" />
     </children>
     <padding>
-        <Insets top="30" bottom="30" left="40" right="40" />
+        <Insets bottom="30" left="40" right="40" top="30" />
     </padding>
 </VBox>

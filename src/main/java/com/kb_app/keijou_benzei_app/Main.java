@@ -20,7 +20,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        (new Database()).generateUser("Chuj2117", "211713");
+        (new Database()).generateUser("user", "1234");
         launch();
     }
 }
