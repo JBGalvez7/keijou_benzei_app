@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="392.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.LoginController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="392.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.LoginController">
    <children>
-      <Text fill="#333" strokeType="OUTSIDE" strokeWidth="0.0" text="KEIJOU BENKEI" wrappingWidth="294.728515625">
+      <Text fill="#333" strokeType="OUTSIDE" strokeWidth="0.0" text="KEIJOU BENKEI" wrappingWidth="326.728515625">
          <font>
-            <Font name="Eras Bold ITC" size="36.0" />
+            <Font name="Eras Bold ITC" size="40.0" />
          </font>
          <effect>
             <DropShadow color="#888888" radius="5.0" />

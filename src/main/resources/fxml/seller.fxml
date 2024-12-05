@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="555.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #7FFFD4, #00FFFF, #0000FF);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
+<VBox alignment="CENTER" prefHeight="555.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #7FFFD4, #00FFFF, #0000FF);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
     <children>
         <Button layoutX="50" layoutY="50" onAction="#handleBack" text="Back" textFill="RED" translateX="-185.0" translateY="-150.0" />
         <Text style="-fx-font-size: 24px; -fx-font-weight: bold;" text="KEIJOU BENKEI CREATOR CENTER PANEL" textAlignment="CENTER" translateY="-80.0" wrappingWidth="356.4453125">
          <font>
-            <Font name="Eras Bold ITC" size="26.0" />
+            <Font name="Eras Bold ITC" size="35.0" />
          </font></Text>
         <Text style="-fx-font-size: 18px;" text="Today's Earnings: $0.00" translateY="-80.0" />
         <Button onAction="#viewEarningHistory" styleClass="seller-button" text="Earning History" translateY="-50.0" />
