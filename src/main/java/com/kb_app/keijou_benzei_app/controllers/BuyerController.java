@@ -6,12 +6,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
 
 public class BuyerController {
+
+    @FXML
+    private ImageView product1ImageView;
+
+    @FXML
+    private ImageView product2ImageView;
+
+    @FXML
+    private ImageView product3ImageView;
+
+    @FXML
+    private ImageView product4ImageView;
+
     @FXML
     private void handleBack(ActionEvent event) {
         try {
@@ -21,10 +35,11 @@ public class BuyerController {
             stage.setScene(new Scene(root));
             stage.setTitle("Buyer/Seller Selection");
             stage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void viewOrders(ActionEvent event) {
     }
 
@@ -32,5 +47,23 @@ public class BuyerController {
     }
 
     public void browseProducts(ActionEvent event) {
+    }
+
+    @FXML
+    public void initialize() {
+        product1ImageView.setImage(loadImage("images/FNciNkcXsAExu5w.png"));
+        product2ImageView.setImage(loadImage("images/20231110_170958.jpg"));
+        product3ImageView.setImage(loadImage("images/GdliQsrWYAAO7ge.jpg"));
+        product4ImageView.setImage(loadImage("images/GdliQsrWYAAO7ge.jpg"));
+    }
+
+    private Image loadImage(String relativePath) {
+        InputStream imageStream = getClass().getResourceAsStream("/" + relativePath);
+        if (imageStream != null) {
+            return new Image(imageStream);
+        } else {
+            System.err.println("Image not found: " + relativePath);
+            return null;
+        }
     }
 }
