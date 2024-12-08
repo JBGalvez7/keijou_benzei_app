@@ -19,6 +19,7 @@ public class BuyerSellerController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/buyer.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.setTitle("Buyer Section");
         stage.setScene(scene);
         stage.show();
     }
@@ -27,6 +28,7 @@ public class BuyerSellerController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/seller.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.setTitle("Seller Selection");
         stage.setScene(scene);
         stage.show();
     }
