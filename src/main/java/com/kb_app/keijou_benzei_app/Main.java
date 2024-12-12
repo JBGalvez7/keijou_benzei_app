@@ -23,4 +23,6 @@ public class Main extends Application {
         (new Database()).generateUser("user", "1234");
         launch();
     }
+
+
 }

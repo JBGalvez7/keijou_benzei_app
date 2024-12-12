@@ -38,7 +38,7 @@ public class Database {
     }
 
     public void generateUser(String username, String password){
-        String query = "INSERT INTO users(username, password) VALUES (?, ?)";
+        String query = "INSERT INTO user(username, password) VALUES (?, ?)";
         try{
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);

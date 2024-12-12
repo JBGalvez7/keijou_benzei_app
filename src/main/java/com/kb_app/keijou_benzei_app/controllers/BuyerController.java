@@ -27,6 +27,24 @@ public class BuyerController {
     private ImageView product4ImageView;
 
     @FXML
+    private ImageView product5ImageView;
+
+    @FXML
+    private ImageView product6ImageView;
+
+    @FXML
+    private ImageView product7ImageView;
+
+    @FXML
+    private ImageView product8ImageView;
+
+    @FXML
+    private ImageView product9ImageView;
+
+    @FXML
+    private ImageView product10ImageView;
+
+    @FXML
     private void handleBack(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buyerseller.fxml"));
@@ -55,6 +73,12 @@ public class BuyerController {
         product2ImageView.setImage(loadImage("images/20231110_170958.jpg"));
         product3ImageView.setImage(loadImage("images/GdliQsrWYAAO7ge.jpg"));
         product4ImageView.setImage(loadImage("images/GdliQsrWYAAO7ge.jpg"));
+        product5ImageView.setImage(loadImage("images/FNciNkcXsAExu5w.png"));
+        product6ImageView.setImage(loadImage("images/20231110_170958.jpg"));
+        product7ImageView.setImage(loadImage("images/GdliQsrWYAAO7ge.jpg"));
+        product8ImageView.setImage(loadImage("images/GdliQsrWYAAO7ge.jpg"));
+        product9ImageView.setImage(loadImage("images/FNciNkcXsAExu5w.png"));
+        product10ImageView.setImage(loadImage("images/20231110_170958.jpg"));
     }
 
     private Image loadImage(String relativePath) {
