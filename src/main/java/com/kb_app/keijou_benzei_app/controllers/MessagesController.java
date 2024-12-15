@@ -65,7 +65,6 @@ public class MessagesController {
             loadMessages();
         }
     }
-
     @FXML
     private void handleBack(ActionEvent event) {
         try {
@@ -78,22 +77,7 @@ public class MessagesController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Navigating to Browse Products screen...");
-    }
-
-    @FXML
-    private void handleMessages(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/messages.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Buyer - Messages");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Navigating to Messages screen...");
+        System.out.println("Navigating to Buyer screen...");
     }
 
     @FXML
@@ -110,6 +94,22 @@ public class MessagesController {
         }
         System.out.println("Navigating to Orders screen...");
     }
+
+    @FXML
+    private void handleMessages(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/messages.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buyer - Messages");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("You're already at Messages screen...");
+    }
+
     @FXML
     private void handleBrowse(ActionEvent event) {
         try {
@@ -122,6 +122,6 @@ public class MessagesController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Navigating to Browse Products screen...");
+        System.out.println("Navigating to Buyer screen...");
     }
 }

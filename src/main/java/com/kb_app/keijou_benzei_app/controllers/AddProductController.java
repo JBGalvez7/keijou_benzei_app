@@ -27,8 +27,7 @@ public class AddProductController {
     }
 
     private void loadCategories() {
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "")) {
             String query = "SELECT name FROM category";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -38,7 +37,6 @@ public class AddProductController {
                 categoryComboBox.getItems().add(categoryName); // Add category to ComboBox
             }
 
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,9 +60,8 @@ public class AddProductController {
             return;
         }
 
-        try {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "")) {
             // Fetch categoryID based on the selected category name
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
             String categoryQuery = "SELECT categoryID FROM category WHERE name = ?";
             PreparedStatement pstmtCategory = conn.prepareStatement(categoryQuery);
             pstmtCategory.setString(1, categoryName);
@@ -93,8 +90,6 @@ public class AddProductController {
 
             pstmt.executeUpdate();
             System.out.println("Product successfully added!");
-
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

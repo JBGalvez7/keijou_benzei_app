@@ -12,10 +12,11 @@ import javafx.stage.Stage;
 import com.kb_app.keijou_benzei_app.utility.Database;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -28,7 +29,8 @@ public class LoginController {
     @FXML
     private Text errorMessage;
 
-    private Database database = new Database();  // Initialize the database connection
+    // Database utility class instance
+    private Database database = new Database();
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -51,21 +53,27 @@ public class LoginController {
         }
     }
 
+    // Method to check if the entered username and password are valid
     private boolean isValidLogin(String username, String password) {
-        try (Connection conn = database.getConnection()) {
-            String query = "SELECT password FROM user WHERE username = ?";
-            try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-                pstmt.setString(1, username);
-                ResultSet rs = pstmt.executeQuery();
+        String query = "SELECT password FROM user WHERE username = ?";
+        try (Connection conn = database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
 
-                if (rs.next()) {
-                    String storedPassword = rs.getString("password");
-                    return BCrypt.checkpw(password, storedPassword);  // Compare the hashed password
-                }
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Get the hashed password from the database
+                String hashedPassword = rs.getString("password");
+                // Check if the entered password matches the hashed password
+                return BCrypt.checkpw(password, hashedPassword);
+            } else {
+                // Username not found
+                return false;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;  // Return false if no matching user was found
     }
 }

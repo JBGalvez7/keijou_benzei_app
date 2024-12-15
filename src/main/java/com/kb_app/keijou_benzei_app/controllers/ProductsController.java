@@ -1,7 +1,9 @@
 package com.kb_app.keijou_benzei_app.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,24 +27,21 @@ public class ProductsController {
     }
 
     private void loadProductsFromDatabase() {
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
-            Statement stmt = conn.createStatement();
-            // Fetch product details along with category name by joining products and category tables
-            String query = "SELECT p.Name, c.name AS Category, p.Price FROM products p " +
-                    "JOIN category c ON p.categoryID = c.categoryID";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
+             Statement stmt = conn.createStatement()) {
+
+            String query = "SELECT p.productID, p.name, c.name AS Category, p.price " +
+                    "FROM products p JOIN category c ON p.categoryID = c.categoryID"; // Updated query with category
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                String name = rs.getString("Name");
+                String name = rs.getString("name");
                 String category = rs.getString("Category"); // Get the category name
-                double price = rs.getDouble("Price");
+                double price = rs.getDouble("price");
 
                 Text productInfo = new Text(String.format("%s - %s: ₱%.2f", category, name, price));
                 productsContainer.getChildren().add(productInfo);
             }
-
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,5 +59,50 @@ public class ProductsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Seller.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seller Section");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Seller screen...");
+    }
+
+    @FXML
+    private void handleProducts(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/products.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seller - Products");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("You're already at Products screen...");
+    }
+
+    @FXML
+    private void handleEarningsHistory(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/earningsHistory.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seller - Earnings History");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Earnings History screen");
     }
 }

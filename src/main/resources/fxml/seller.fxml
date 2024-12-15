@@ -2,18 +2,18 @@
 
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
 
     <!-- Sidebar -->
     <left>
-        <VBox alignment="CENTER" prefWidth="200.0" spacing="20" style="-fx-background-color: #333; -fx-padding: 20; -fx-min-height: 100%; -fx-min-width: 100%;">
+        <VBox alignment="CENTER" prefWidth="250.0" spacing="20.0" style="-fx-background-color: #333; -fx-padding: 20; -fx-min-height: 100%;">
             <children>
-                <Text style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Seller Panel" />
+                <Text style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" text="Seller Panel" />
                 <Button onAction="#handleEarningsHistory" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Earnings" />
                 <Button onAction="#handleProducts" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Products" />
                 <Button onAction="#handleBack" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #e74c3c;" text="Sign Out" />
@@ -23,54 +23,55 @@
 
     <!-- Main Content -->
     <center>
-        <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 20; -fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3); -fx-min-width: 100%; -fx-min-height: 100%;">
+        <VBox alignment="TOP_CENTER" spacing="30.0" style="-fx-padding: 30; -fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3); -fx-min-width: 100%; -fx-min-height: 100%;">
             <children>
                 <!-- Header -->
-                <Text fill="#333" strokeType="OUTSIDE" strokeWidth="0.0" text="KEIJOU BENKEI - Seller Panel" wrappingWidth="600.0">
+                <Text fill="#333" strokeType="OUTSIDE" strokeWidth="0.0" text="KEIJOU BENKEI - Seller Panel" wrappingWidth="800.0">
                     <font>
                         <Font name="Eras Bold ITC" size="40.0" />
                     </font>
                 </Text>
-                <Text fill="#666" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Your Sales and Products" translateY="-10.0">
+                <Text fill="#666" strokeType="OUTSIDE" strokeWidth="0.0" text="Monitor Your Sales, Products, and Performance" translateY="-10.0">
                     <font>
                         <Font name="Eras Demi ITC" size="20.0" />
                     </font>
                 </Text>
 
-                <HBox alignment="CENTER" spacing="30" style="-fx-padding: 10;">
-                    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #3498db; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 200;">
+                <!-- Key Statistics -->
+                <HBox alignment="CENTER" spacing="30" style="-fx-padding: 20;">
+                    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #3498db; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 250;">
                         <Text text="Today's Income" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-                        <Label fx:id="lblTodayIncome" text="/$2" style="-fx-font-size: 24px; -fx-text-fill: white;" />
+                        <Label fx:id="lblTodayIncome" text="₱2,345.00" style="-fx-font-size: 24px; -fx-text-fill: white;" />
                     </VBox>
 
-                    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #27ae60; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 200;">
+                    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #27ae60; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 250;">
                         <Text text="Total Income" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-                        <Label fx:id="lblTotalIncome" text="/$288.85" style="-fx-font-size: 24px; -fx-text-fill: white;" />
+                        <Label fx:id="lblTotalIncome" text="₱120,345.00" style="-fx-font-size: 24px; -fx-text-fill: white;" />
                     </VBox>
 
-                    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #e67e22; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 200;">
+                    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #e67e22; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 250;">
                         <Text text="Products Sold" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-                        <Label fx:id="lblProductsSold" text="35" style="-fx-font-size: 24px; -fx-text-fill: white;" />
+                        <Label fx:id="lblProductsSold" text="1,234" style="-fx-font-size: 24px; -fx-text-fill: white;" />
                     </VBox>
                 </HBox>
 
-                <HBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
-
-                    <VBox spacing="10">
-                        <Text text="Income Over Time" style="-fx-font-size: 16px; -fx-text-fill: #333;" />
-                        <LineChart fx:id="incomeChart" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                <!-- Charts Section -->
+                <HBox alignment="CENTER" spacing="30" style="-fx-padding: 30;">
+                    <VBox spacing="20" alignment="TOP_CENTER">
+                        <Text text="Income Over Time" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
+                        <LineChart fx:id="incomeChart" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                             <xAxis>
                                 <CategoryAxis label="Date" />
                             </xAxis>
                             <yAxis>
-                                <NumberAxis label="Income" />
+                                <NumberAxis label="Income ($)" />
                             </yAxis>
                         </LineChart>
                     </VBox>
 
-                    <VBox spacing="10">
-                        <Text text="Products Sold" style="-fx-font-size: 16px; -fx-text-fill: #333;" />
-                        <BarChart fx:id="productSalesChart" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                    <VBox spacing="20" alignment="TOP_CENTER">
+                        <Text text="Products Sold Over Time" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
+                        <BarChart fx:id="productSalesChart" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                             <xAxis>
                                 <CategoryAxis label="Date" />
                             </xAxis>
@@ -78,6 +79,40 @@
                                 <NumberAxis label="Products Sold" />
                             </yAxis>
                         </BarChart>
+                    </VBox>
+                </HBox>
+
+                <!-- Additional Panels -->
+                <HBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
+                    <VBox spacing="10" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-padding: 20; -fx-min-width: 500;">
+                        <Text text="Top Products" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
+                        <TableView fx:id="topProductsTable" prefHeight="300.0">
+                            <columns>
+                                <TableColumn text="Product Name" prefWidth="200">
+                                    <cellValueFactory><PropertyValueFactory property="productName" /></cellValueFactory>
+                                </TableColumn>
+                                <TableColumn text="Sales" prefWidth="150">
+                                    <cellValueFactory><PropertyValueFactory property="sales" /></cellValueFactory>
+                                </TableColumn>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <VBox spacing="10" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-padding: 20; -fx-min-width: 500;">
+                        <Text text="Recent Orders" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
+                        <TableView fx:id="recentOrdersTable" prefHeight="300.0">
+                            <columns>
+                                <TableColumn text="Order ID" prefWidth="150">
+                                    <cellValueFactory><PropertyValueFactory property="orderId" /></cellValueFactory>
+                                </TableColumn>
+                                <TableColumn text="Customer" prefWidth="200">
+                                    <cellValueFactory><PropertyValueFactory property="customerName" /></cellValueFactory>
+                                </TableColumn>
+                                <TableColumn text="Amount" prefWidth="150">
+                                    <cellValueFactory><PropertyValueFactory property="amount" /></cellValueFactory>
+                                </TableColumn>
+                            </columns>
+                        </TableView>
                     </VBox>
                 </HBox>
             </children>
