@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600" prefWidth="800" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kb_app.keijou_benzei_app.controllers.ProductsController">
+    <!-- Title Header -->
+    <Text text="Your Products" layoutX="20" layoutY="40" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+    <!-- Products List Section -->
+    <ScrollPane layoutX="20" layoutY="80" prefHeight="440" prefWidth="760">
+        <VBox spacing="10" fx:id="productsContainer">
+            <!-- Each product category and product will be dynamically loaded here -->
+        </VBox>
+    </ScrollPane>
+
+    <!-- Add Product Button -->
+    <Button text="Add Product" layoutX="680" layoutY="540" prefWidth="100" onAction="#handleAddProduct" />
+</AnchorPane>

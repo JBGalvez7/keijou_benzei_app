@@ -2,11 +2,7 @@ package com.kb_app.keijou_benzei_app.utility;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Database {
     private Connection connection;
@@ -20,7 +16,6 @@ public class Database {
             e.printStackTrace();
         }
     }
-
 
     public Connection getConnection() {
         return connection;
@@ -38,15 +33,27 @@ public class Database {
     }
 
     public void generateUser(String username, String password){
-        String query = "INSERT INTO user(username, password) VALUES (?, ?)";
-        try{
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, username);
-            ps.setString(2, BCrypt.hashpw(password, BCrypt.gensalt()));
-            ps.executeUpdate();
-            System.out.println("New user created");
-        }catch(SQLException e){
+        // First, check if the username already exists
+        String checkQuery = "SELECT COUNT(*) FROM user WHERE username = ?";
+        try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+            checkStmt.setString(1, username);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Username already exists.");
+            } else {
+                // Insert the new user if the username is not found
+                String query = "INSERT INTO user(username, password) VALUES (?, ?)";
+                try (PreparedStatement ps = connection.prepareStatement(query)) {
+                    ps.setString(1, username);
+                    ps.setString(2, BCrypt.hashpw(password, BCrypt.gensalt()));
+                    ps.executeUpdate();
+                    System.out.println("New user created");
+                }
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }
