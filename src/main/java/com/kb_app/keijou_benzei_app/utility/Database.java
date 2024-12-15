@@ -33,7 +33,6 @@ public class Database {
     }
 
     public void generateUser(String username, String password){
-        // First, check if the username already exists
         String checkQuery = "SELECT COUNT(*) FROM user WHERE username = ?";
         try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
             checkStmt.setString(1, username);
@@ -42,7 +41,6 @@ public class Database {
             if (rs.next() && rs.getInt(1) > 0) {
                 System.out.println("Username already exists.");
             } else {
-                // Insert the new user if the username is not found
                 String query = "INSERT INTO user(username, password) VALUES (?, ?)";
                 try (PreparedStatement ps = connection.prepareStatement(query)) {
                     ps.setString(1, username);

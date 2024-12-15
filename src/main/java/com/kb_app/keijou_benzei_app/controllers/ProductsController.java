@@ -31,7 +31,9 @@ public class ProductsController {
              Statement stmt = conn.createStatement()) {
 
             String query = "SELECT p.productID, p.name, c.name AS Category, p.price " +
-                    "FROM products p JOIN category c ON p.categoryID = c.categoryID"; // Updated query with category
+                    "FROM products p " +
+                    "JOIN category c ON p.categoryID = c.categoryID " +
+                    "WHERE p.userID = 1";  // Filter by userID = 1
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {

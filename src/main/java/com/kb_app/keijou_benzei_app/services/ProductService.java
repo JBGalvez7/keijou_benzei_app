@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/your_database";
-    private static final String DB_USER = "your_user";
-    private static final String DB_PASSWORD = "your_password";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/kb_app_db";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "";
 
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();

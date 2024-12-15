@@ -15,14 +15,14 @@ public class ProductPreviewController {
     @FXML
     private ImageView productImageView;
     @FXML
-    private Label productNameLabel, productPriceLabel, productCategoryLabel, productSizeLabel, productGenderLabel, productAgePrefLabel, productDescriptionLabel;
+    private Label productNameLabel, productPriceLabel, productCategoryLabel, productSizeLabel, productGenderLabel, productAgePrefLabel;
 
     @FXML
     private Button buyNowButton, addToCartButton;
 
     private int productId;
 
-    public void setProductDetails(int id, String name, String price, String category, String size, String gender, String agePref, String description, String imagePath) {
+    public void setProductDetails(int id, String name, String price, String category, String size, String gender, String agePref, String imagePath) {
         productId = id;
         productNameLabel.setText(name);
         productPriceLabel.setText("Price: " + price);
@@ -30,7 +30,6 @@ public class ProductPreviewController {
         productSizeLabel.setText("Size: " + size);
         productGenderLabel.setText("Gender: " + gender);
         productAgePrefLabel.setText("Age Preference: " + agePref);
-        productDescriptionLabel.setText(description);
         productImageView.setImage(new Image(getClass().getResourceAsStream("/" + imagePath)));
     }
 
