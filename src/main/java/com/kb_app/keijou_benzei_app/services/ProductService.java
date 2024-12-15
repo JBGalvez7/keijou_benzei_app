@@ -14,8 +14,7 @@ public class ProductService {
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         String query = "SELECT p.productID, p.name, p.price, p.picture_url, p.style, p.size, p.agePreference, p.gender, p.ratings, p.soldCount, p.sellerID, c.name AS category " +
-                "FROM products p JOIN category c ON p.categoryID = c.categoryID";  // Join with category table
-
+                "FROM products p JOIN category c ON p.categoryID = c.categoryID";
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {

@@ -15,16 +15,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 
 public class ProductsController {
@@ -44,12 +34,12 @@ public class ProductsController {
             String query = "SELECT p.productID, p.name, c.name AS Category, p.price " +
                     "FROM products p " +
                     "JOIN category c ON p.categoryID = c.categoryID " +
-                    "WHERE p.userID = 1";  // Filter by userID = 1
+                    "WHERE p.userID = 1";
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 String name = rs.getString("name");
-                String category = rs.getString("Category"); // Get the category name
+                String category = rs.getString("Category");
                 double price = rs.getDouble("price");
 
                 Text productInfo = new Text(String.format("%s - %s: ₱%.2f", category, name, price));

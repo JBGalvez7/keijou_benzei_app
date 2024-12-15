@@ -38,7 +38,7 @@ public class MessageService {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setInt(1, 1); // Example senderID, replace with actual user ID
+            pstmt.setInt(1, 1);
             pstmt.setString(2, content);
 
             pstmt.executeUpdate();
