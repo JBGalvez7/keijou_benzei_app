@@ -108,6 +108,8 @@ public class ProductPreviewController {
                 System.out.println("Order placement failed.");
             }
 
+            System.out.println("Inserted Product ID: " + productId + ", Buyer ID: " + buyerId);
+
             Stage stage = (Stage) buyNowButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/orders.fxml"));
             stage.setScene(new Scene(loader.load()));
