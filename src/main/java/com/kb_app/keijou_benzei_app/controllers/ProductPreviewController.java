@@ -10,6 +10,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 public class ProductPreviewController {
 
     @FXML
@@ -26,11 +32,17 @@ public class ProductPreviewController {
         productId = id;
         productNameLabel.setText(name);
         productPriceLabel.setText("Price: " + price);
-        productCategoryLabel.setText("Category: " + category); // Display category name
+        productCategoryLabel.setText("Category: " + category);
         productSizeLabel.setText("Size: " + size);
         productGenderLabel.setText("Gender: " + gender);
         productAgePrefLabel.setText("Age Preference: " + agePref);
-        productImageView.setImage(new Image(getClass().getResourceAsStream("/" + imagePath)));
+
+        InputStream imageStream = getClass().getResourceAsStream("/" + imagePath);
+        if (imageStream == null) {
+            System.out.println("Image not found: " + imagePath);
+        } else {
+            productImageView.setImage(new Image(imageStream));
+        }
     }
 
     @FXML
@@ -71,11 +83,44 @@ public class ProductPreviewController {
 
     @FXML
     private void handleBuyNow(ActionEvent event) {
-        // Handle Buy Now Logic
+        int buyerId = 1;
+        int quantity = 1;
+        String status = "To Pay";
+
+        if (productId <= 0) {
+            System.out.println("Invalid product ID: " + productId);
+            return;
+        }
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
+             PreparedStatement stmt = conn.prepareStatement(
+                     "INSERT INTO orders (productID, buyerID, status, quantity, dateOrdered) VALUES (?, ?, ?, ?, NOW())"
+             )) {
+            stmt.setInt(1, productId);
+            stmt.setInt(2, buyerId);
+            stmt.setString(3, status);
+            stmt.setInt(4, quantity);
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Order placed successfully!");
+            } else {
+                System.out.println("Order placement failed.");
+            }
+
+            Stage stage = (Stage) buyNowButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/orders.fxml"));
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Buyer - Orders");
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("Foreign key constraint violation. Ensure productID exists in the products table.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void handleAddToCart(ActionEvent event) {
-        // Handle Add to Cart Logic
     }
 }

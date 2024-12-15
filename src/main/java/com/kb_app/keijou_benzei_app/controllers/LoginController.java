@@ -29,7 +29,6 @@ public class LoginController {
     @FXML
     private Text errorMessage;
 
-    // Database utility class instance
     private Database database = new Database();
 
     @FXML
@@ -53,7 +52,6 @@ public class LoginController {
         }
     }
 
-    // Method to check if the entered username and password are valid
     private boolean isValidLogin(String username, String password) {
         String query = "SELECT password FROM user WHERE username = ?";
         try (Connection conn = database.getConnection();
@@ -63,12 +61,9 @@ public class LoginController {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // Get the hashed password from the database
                 String hashedPassword = rs.getString("password");
-                // Check if the entered password matches the hashed password
                 return BCrypt.checkpw(password, hashedPassword);
             } else {
-                // Username not found
                 return false;
             }
         } catch (SQLException e) {

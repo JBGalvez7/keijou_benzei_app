@@ -14,7 +14,16 @@ public class Product {
     private int soldCount;
     private int sellerID;
 
-    // Getters and setters for all fields
+    public Product(String name, double price, String category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    public Product() {
+
+    }
+
     public int getProductID() {
         return productID;
     }

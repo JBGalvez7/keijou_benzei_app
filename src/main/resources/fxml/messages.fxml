@@ -8,10 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<!-- Messages Section -->
 <BorderPane prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.MessagesController">
 
-    <!-- Sidebar -->
     <left>
         <VBox alignment="CENTER" prefWidth="200.0" spacing="20" style="-fx-background-color: #333; -fx-padding: 20; -fx-min-height: 100%;">
             <children>
@@ -24,7 +22,6 @@
         </VBox>
     </left>
 
-    <!-- Main Content -->
     <center>
         <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 20; -fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3); -fx-min-width: 100%; -fx-min-height: 100%;">
             <children>
@@ -33,7 +30,6 @@
                     <ScrollPane fitToWidth="true">
                         <content>
                             <VBox fx:id="messagesVBox" spacing="10.0">
-                                <!-- Messages will be dynamically loaded here -->
                             </VBox>
                         </content>
                     </ScrollPane>

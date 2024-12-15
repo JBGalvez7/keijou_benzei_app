@@ -24,8 +24,13 @@ public class EarningsHistoryController {
 
     private void loadEarningsHistory() {
         ObservableList<EarningRecord> records = FXCollections.observableArrayList(
-                new EarningRecord("INV001", "2024-06-20", "Phone", "₱5000"),
-                new EarningRecord("INV002", "2024-06-21", "Laptop", "₱35000")
+                new EarningRecord("INV001", "2024-11-20", "Women Korean Black Coat or Blazer", "₱120.00"),
+                new EarningRecord("INV002", "2024-11-21", "Original Design Blue V Neck Cross Patchwork Cold Shoulder Cotton Shirt", "₱170.00"),
+                new EarningRecord("INV001", "2024-11-21", "Women Korean Black Coat or Blazer", "₱120.00"),
+                new EarningRecord("INV002", "2024-11-25", "Women Korean Black Coat or Blazer", "₱120.00"),
+                new EarningRecord("INV001", "2024-11-27", "Original Design Blue V Neck Cross Patchwork Cold Shoulder Cotton Shirt", "₱170.00"),
+                new EarningRecord("INV002", "2024-12-01", "Original Design Blue V Neck Cross Patchwork Cold Shoulder Cotton Shirt", "₱170.00")
+
         );
 
         earningsTable.setItems(records);

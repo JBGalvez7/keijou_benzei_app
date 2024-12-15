@@ -34,7 +34,7 @@ public class AddProductController {
 
             while (rs.next()) {
                 String categoryName = rs.getString("name");
-                categoryComboBox.getItems().add(categoryName); // Add category to ComboBox
+                categoryComboBox.getItems().add(categoryName);
             }
 
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class AddProductController {
     private void handleAddProduct() {
         String name = nameField.getText();
         String price = priceField.getText();
-        String categoryName = categoryComboBox.getValue(); // Get selected category name
+        String categoryName = categoryComboBox.getValue();
         String style = styleField.getText();
         String size = sizeComboBox.getValue();
         String agePref = agePrefComboBox.getValue();
@@ -61,7 +61,6 @@ public class AddProductController {
         }
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "")) {
-            // Fetch categoryID based on the selected category name
             String categoryQuery = "SELECT categoryID FROM category WHERE name = ?";
             PreparedStatement pstmtCategory = conn.prepareStatement(categoryQuery);
             pstmtCategory.setString(1, categoryName);
@@ -72,21 +71,20 @@ public class AddProductController {
                 categoryID = rsCategory.getInt("categoryID");
             }
 
-            // Insert the product with the retrieved categoryID
             String query = "INSERT INTO products(name, price, picture_url, categoryID, style, size, agePreference, gender, ratings, soldCount, sellerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, name);
             pstmt.setBigDecimal(2, new java.math.BigDecimal(price));
             pstmt.setString(3, picture);
-            pstmt.setInt(4, categoryID); // Insert categoryID instead of category name
+            pstmt.setInt(4, categoryID);
             pstmt.setString(5, style.isEmpty() ? null : style);
             pstmt.setString(6, size);
             pstmt.setString(7, agePref);
             pstmt.setString(8, gender);
             pstmt.setDouble(9, ratings.isEmpty() ? 0.0 : Double.parseDouble(ratings));
             pstmt.setInt(10, soldCount.isEmpty() ? 0 : Integer.parseInt(soldCount));
-            pstmt.setInt(11, 1); // Static SellerID for now; replace with actual session data
+            pstmt.setInt(11, 1);
 
             pstmt.executeUpdate();
             System.out.println("Product successfully added!");

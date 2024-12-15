@@ -37,15 +37,12 @@ public class BuyerController {
     @FXML
     private ImageView product10ImageView;
 
-    // Product data map for easy reference (productID -> Product details)
     private final Map<Integer, Product> productMap = new HashMap<>();
 
     @FXML
     public void initialize() {
-        // Load products into the map
         loadProductData();
 
-        // Set images for the ImageViews
         setupProductImages();
     }
 
@@ -151,7 +148,6 @@ public class BuyerController {
         }
     }
 
-    // Nested class to encapsulate product details
     private static class Product {
         private final int id;
         private final String name;

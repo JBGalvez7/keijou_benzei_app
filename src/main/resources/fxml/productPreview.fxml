@@ -11,7 +11,6 @@
       style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-spacing: 20; -fx-pref-width: 800;">
 
     <children>
-        <!-- Sidebar Navigation -->
         <VBox alignment="CENTER" prefWidth="200.0" spacing="20"
               style="-fx-background-color: #2c3e50; -fx-padding: 20;">
             <children>
@@ -27,20 +26,16 @@
             </children>
         </VBox>
 
-        <!-- Product Details Section -->
         <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20; -fx-background-color: #f4f4f4; -fx-pref-width: 600;">
             <children>
                 <ImageView fx:id="productImageView" fitHeight="300" fitWidth="300" style="-fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);" />
 
-                <!-- Product Name -->
                 <Label fx:id="productNameLabel" text="Product Name"
                        style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
 
-                <!-- Price -->
-                <Label fx:id="productPriceLabel" text="Price: $100.00"
+                <Label fx:id="productPriceLabel" text="Price: ₱100.00"
                        style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;" />
 
-                <!-- Product Details -->
                 <VBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10;">
                     <children>
                         <Label fx:id="productCategoryLabel" text="Category: " style="-fx-font-size: 16px;" />
@@ -50,7 +45,6 @@
                     </children>
                 </VBox>
 
-                <!-- Action Buttons -->
                 <HBox spacing="20" alignment="CENTER">
                     <children>
                         <Button fx:id="buyNowButton" text="Buy Now" onAction="#handleBuyNow"

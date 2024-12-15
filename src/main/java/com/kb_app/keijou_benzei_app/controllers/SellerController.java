@@ -35,18 +35,18 @@ public class SellerController {
     }
 
     private void loadSellerStats() {
-        lblTodayIncome.setText("₱1989.15");
+        lblTodayIncome.setText("₱1989.13");
         lblTotalIncome.setText("₱21,117.85");
-        lblProductsSold.setText("108");
+        lblProductsSold.setText("66");
     }
 
     private void loadIncomeChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Income Over Time");
 
-        series.getData().add(new XYChart.Data<>("2023-03-20", 70));
-        series.getData().add(new XYChart.Data<>("2023-03-22", 160));
-        series.getData().add(new XYChart.Data<>("2023-04-02", 60));
+        series.getData().add(new XYChart.Data<>("2024-010-20", 70));
+        series.getData().add(new XYChart.Data<>("2024-011-22", 160));
+        series.getData().add(new XYChart.Data<>("2024-012-02", 60));
 
         incomeChart.getData().add(series);
     }
@@ -55,9 +55,9 @@ public class SellerController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Products Sold");
 
-        series.getData().add(new XYChart.Data<>("2023-03-20", 5));
-        series.getData().add(new XYChart.Data<>("2023-03-22", 14));
-        series.getData().add(new XYChart.Data<>("2023-04-02", 3));
+        series.getData().add(new XYChart.Data<>("2024-010-20", 5));
+        series.getData().add(new XYChart.Data<>("2024-011-22", 14));
+        series.getData().add(new XYChart.Data<>("2024-012-02", 3));
 
         productSalesChart.getData().add(series);
     }

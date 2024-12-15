@@ -9,7 +9,6 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <BorderPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.SellerController">
 
-    <!-- Sidebar -->
     <left>
         <VBox alignment="CENTER" prefWidth="250.0" spacing="20.0" style="-fx-background-color: #333; -fx-padding: 20; -fx-min-height: 100%;">
             <children>
@@ -21,11 +20,9 @@
         </VBox>
     </left>
 
-    <!-- Main Content -->
     <center>
         <VBox alignment="TOP_CENTER" spacing="30.0" style="-fx-padding: 30; -fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3); -fx-min-width: 100%; -fx-min-height: 100%;">
             <children>
-                <!-- Header -->
                 <Text fill="#333" strokeType="OUTSIDE" strokeWidth="0.0" text="KEIJOU BENKEI - Seller Panel" wrappingWidth="800.0">
                     <font>
                         <Font name="Eras Bold ITC" size="40.0" />
@@ -37,7 +34,6 @@
                     </font>
                 </Text>
 
-                <!-- Key Statistics -->
                 <HBox alignment="CENTER" spacing="30" style="-fx-padding: 20;">
                     <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #3498db; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 250;">
                         <Text text="Today's Income" style="-fx-font-size: 16px; -fx-text-fill: white;" />
@@ -46,7 +42,7 @@
 
                     <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #27ae60; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 250;">
                         <Text text="Total Income" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-                        <Label fx:id="lblTotalIncome" text="₱120,345.00" style="-fx-font-size: 24px; -fx-text-fill: white;" />
+                        <Label fx:id="lblTotalIncome" text="₱20,345.00" style="-fx-font-size: 24px; -fx-text-fill: white;" />
                     </VBox>
 
                     <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #e67e22; -fx-background-radius: 10; -fx-padding: 20; -fx-min-width: 250;">
@@ -55,7 +51,6 @@
                     </VBox>
                 </HBox>
 
-                <!-- Charts Section -->
                 <HBox alignment="CENTER" spacing="30" style="-fx-padding: 30;">
                     <VBox spacing="20" alignment="TOP_CENTER">
                         <Text text="Income Over Time" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
@@ -82,7 +77,6 @@
                     </VBox>
                 </HBox>
 
-                <!-- Additional Panels -->
                 <HBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
                     <VBox spacing="10" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-padding: 20; -fx-min-width: 500;">
                         <Text text="Top Products" style="-fx-font-size: 18px; -fx-text-fill: #333;" />

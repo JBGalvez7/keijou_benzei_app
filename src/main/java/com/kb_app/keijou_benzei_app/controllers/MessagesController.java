@@ -9,11 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -21,51 +19,42 @@ import java.util.List;
 public class MessagesController {
 
     @FXML
-    private VBox messagesVBox;  // This is where the messages will be displayed
+    private VBox messagesVBox;
     @FXML
-    private TextField messageInput;  // Input field for the message
+    private TextField messageInput;
     @FXML
-    private Button sendButton;  // Send button
+    private Button sendButton;
 
-    private MessageService messageService;  // Service to handle messages (could be an API call)
+    private MessageService messageService;
 
-    // Initialize the controller, connect to the MessageService
     public void initialize() {
         messageService = new MessageService();
         loadMessages();
     }
 
-    // Method to load messages (e.g., from an API)
     public void loadMessages() {
-        List<Message> messages = messageService.getAllMessages();  // Fetch all messages from service
-
-        // Clear the existing messages
+        List<Message> messages = messageService.getAllMessages();
         messagesVBox.getChildren().clear();
 
-        // Display messages dynamically in the VBox
         for (Message message : messages) {
             Text messageText = new Text(message.getContent());
             messagesVBox.getChildren().add(messageText);
         }
     }
 
-    // Method to handle sending a message
     @FXML
     private void sendMessage() {
         String messageContent = messageInput.getText();
 
         if (!messageContent.trim().isEmpty()) {
-            // Send the message using the service
             messageService.sendMessage(messageContent);
-
-            // Clear the input field
             messageInput.clear();
-
-            // Reload messages after sending
             loadMessages();
         }
     }
-    @FXML
+
+
+@FXML
     private void handleBack(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buyer.fxml"));

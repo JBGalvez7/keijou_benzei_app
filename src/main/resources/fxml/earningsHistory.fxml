@@ -9,7 +9,6 @@
 
 <?import javafx.scene.control.Button?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.kb_app.keijou_benzei_app.controllers.EarningsHistoryController" prefHeight="800.0" prefWidth="1200.0">
-    <!-- Sidebar -->
     <VBox alignment="CENTER" spacing="20" style="-fx-background-color: #333; -fx-padding: 20;" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" prefWidth="200">
         <children>
             <Text style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Navigation" />
@@ -19,13 +18,10 @@
         </children>
     </VBox>
 
-    <!-- Main Content -->
     <AnchorPane style="-fx-padding: 20;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
         <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-radius: 10;">
-            <!-- Header -->
             <Text style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Earnings History" />
 
-            <!-- Earnings Table -->
             <TableView fx:id="earningsTable" style="-fx-background-color: white;" prefHeight="600" prefWidth="900">
                 <columns>
                     <TableColumn text="Invoice ID" prefWidth="200">
