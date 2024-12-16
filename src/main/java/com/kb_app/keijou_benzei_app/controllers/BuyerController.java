@@ -36,6 +36,10 @@ public class BuyerController {
     private ImageView product9ImageView;
     @FXML
     private ImageView product10ImageView;
+    @FXML
+    private ImageView product11ImageView;
+    @FXML
+    private ImageView product12ImageView;
 
     private final Map<Integer, Product> productMap = new HashMap<>();
 
@@ -57,7 +61,10 @@ public class BuyerController {
         productMap.put(8, new Product(8, "Young Girl Plaid Print Belted Dress", "150.00", "Dresses", "F", "F", "Teen", "images/Young Girl Plaid Print Belted Dress.jpg"));
         productMap.put(9, new Product(9, "Mens Striped Polo Shirt", "140.00", "Men's Wear", "M", "M", "Young Adult", "images/Mens Striped Polo Shirt Short Sleeve Summer Lapel Ice Silk Korean-style T-Shirt.jpg"));
         productMap.put(10, new Product(10, "Young Boy Casual Crown Pattern Polo Shirt", "80.00", "Kids Wear", "S", "M", "Toddler", "images/1pc Young Boy Casual College Style Crown Pattern Long Sleeve Polo Shirt.jpg"));
+        productMap.put(11, new Product(11, "Women Short Sleeve Thin Casual Fashion Loose Shirt", "140.00", "Women's Wear", "M", "F", "Elder", "images/Women Short Sleeve Thin Casual Fashion Loose Shirt.jpg"));
+        productMap.put(12, new Product(12, "Mens Long-Sleeved Shirts High-End Drape Casual Shirt", "180.00", "Men's Wear", "M", "M", "Young Adult", "images/Mens Long-Sleeved Shirts High-End Drape Casual Shirt.jpg"));
     }
+
 
     private void setupProductImages() {
         setupImageView(product1ImageView, 1);
@@ -70,6 +77,8 @@ public class BuyerController {
         setupImageView(product8ImageView, 8);
         setupImageView(product9ImageView, 9);
         setupImageView(product10ImageView, 10);
+        setupImageView(product11ImageView, 11);
+        setupImageView(product12ImageView, 12);
     }
 
     private void setupImageView(ImageView imageView, int productId) {

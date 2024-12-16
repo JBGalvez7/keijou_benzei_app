@@ -92,6 +92,9 @@ public class ProductPreviewController {
             return;
         }
 
+        System.out.println("Attempting to place order for product ID: " + productId);
+        System.out.println("Buyer ID: " + buyerId + ", Quantity: " + quantity);
+
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
              PreparedStatement stmt = conn.prepareStatement(
                      "INSERT INTO orders (productID, buyerID, status, quantity, dateOrdered) VALUES (?, ?, ?, ?, NOW())"

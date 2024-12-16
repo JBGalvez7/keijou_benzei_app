@@ -44,9 +44,9 @@ public class SellerController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Income Over Time");
 
-        series.getData().add(new XYChart.Data<>("2024-010-20", 70));
-        series.getData().add(new XYChart.Data<>("2024-011-22", 160));
-        series.getData().add(new XYChart.Data<>("2024-012-02", 60));
+        series.getData().add(new XYChart.Data<>("2024-10-20", 70));
+        series.getData().add(new XYChart.Data<>("2024-11-22", 160));
+        series.getData().add(new XYChart.Data<>("2024-12-02", 60));
 
         incomeChart.getData().add(series);
     }
@@ -55,9 +55,9 @@ public class SellerController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Products Sold");
 
-        series.getData().add(new XYChart.Data<>("2024-010-20", 5));
-        series.getData().add(new XYChart.Data<>("2024-011-22", 14));
-        series.getData().add(new XYChart.Data<>("2024-012-02", 3));
+        series.getData().add(new XYChart.Data<>("2024-10-20", 5));
+        series.getData().add(new XYChart.Data<>("2024-11-22", 14));
+        series.getData().add(new XYChart.Data<>("2024-12-02", 3));
 
         productSalesChart.getData().add(series);
     }
