@@ -28,7 +28,7 @@ public class OrdersController {
                              "JOIN product p ON o.productID = p.productID " +
                              "WHERE o.Username = ?"
              )) {
-            stmt.setString(1, buyerUsername);  // Use the correct column (Username)
+            stmt.setString(1, buyerUsername);
             ResultSet rs = stmt.executeQuery();
             ordersListView.getItems().clear();
             while (rs.next()) {

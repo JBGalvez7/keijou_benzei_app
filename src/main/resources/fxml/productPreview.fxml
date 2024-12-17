@@ -8,22 +8,17 @@
       fx:controller="com.kb_app.keijou_benzei_app.controllers.ProductPreviewController"
       spacing="15" alignment="center" style="-fx-padding: 20;">
 
-    <!-- Product Name -->
     <Text fx:id="productNameText" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
-    <!-- Product Image -->
     <ImageView fx:id="productImageView" fitWidth="200" fitHeight="200" preserveRatio="true" />
 
-    <!-- Product Price -->
     <Text fx:id="productPriceText" style="-fx-font-size: 18px;" />
 
-    <!-- Size Selection -->
     <ComboBox fx:id="sizeComboBox" promptText="Select Size" prefWidth="150" />
 
-    <!-- Quantity Input -->
+
     <TextField fx:id="quantityTextField" promptText="Enter Quantity" prefWidth="150" />
 
-    <!-- Buttons Section -->
     <VBox spacing="10" alignment="center">
         <Button fx:id="addToCart" text="Add to Cart" onAction="#addToCart"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />

@@ -93,34 +93,29 @@ public class BuyerController {
         loadProduct(15, product16ImageView, product16Text);
     }
 
-    // Helper method to load a product into an ImageView and Text
+
     private void loadProduct(int index, ImageView imageView, Text text) {
         String imagePath = "/images/" + IMAGE_PATHS[index];
         imageView.setImage(new Image(getClass().getResourceAsStream(imagePath)));
         text.setText(PRODUCT_NAMES[index] + "\n₱" + PRICES[index]);
 
-        // Set action for clicking the image
+
         imageView.setOnMouseClicked(event -> showProductDetails(index));
     }
 
-    // Show product details and navigate to ProductPreview.fxml
+
     private void showProductDetails(int index) {
         try {
-            // Assuming that you are passing productID instead of index
-            int productID = index + 1; // Adjust if necessary to pass correct productID
 
-            // Ensure the product ID is within bounds of your array
-            if (productID < 1 || productID > PRODUCT_NAMES.length) {
-                throw new IllegalArgumentException("Product ID out of bounds");
-            }
+            int productID = index + 1;
 
-            // Load the ProductPreview screen
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/productPreview.fxml"));
             Parent root = loader.load();
 
-            // Pass product data to ProductPreviewController
+
             ProductPreviewController controller = loader.getController();
-            controller.initialize(productID);  // Pass the actual productID
+            controller.initialize(productID);
 
             Stage stage = (Stage) product1ImageView.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -130,7 +125,6 @@ public class BuyerController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void handleBack(ActionEvent event) {

@@ -24,10 +24,9 @@ public class CartController {
 
     private double totalAmount = 0.0;
 
-    // Load cart items for a specific user
     public void loadCart(String buyerUsername) {
         totalAmount = 0.0;
-        try (Connection conn = DBUtil.getConnection(); // Use the connection utility
+        try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "SELECT c.cartID, p.name, c.quantity, c.size, c.totalAmount " +
                              "FROM cart c " +
@@ -57,7 +56,7 @@ public class CartController {
 
     @FXML
     public void initialize() {
-        String buyerUsername = "user"; // Ideally, fetch from the session or context
+        String buyerUsername = "user";
         loadCart(buyerUsername);
     }
 
@@ -90,7 +89,7 @@ public class CartController {
             stmt.setInt(1, cartID);
             stmt.executeUpdate();
             System.out.println("Item removed from cart.");
-            loadCart("user"); // Refresh cart immediately after removing the item
+            loadCart("user");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +97,7 @@ public class CartController {
 
     @FXML
     private void handleProceedToBuy(ActionEvent event) {
-        String buyerUsername = "user"; // Ideally, fetch from the session or context
+        String buyerUsername = "user";
         if (totalAmount == 0) {
             showAlert("Cart is empty", "Please add items to your cart before proceeding.");
             return;
@@ -123,7 +122,6 @@ public class CartController {
                 double change = cash - totalAmount;
                 System.out.println("Change: ₱" + change);
 
-                // Proceed with the transaction
                 processOrder(buyerUsername, change);
 
             } catch (NumberFormatException e) {
@@ -134,9 +132,8 @@ public class CartController {
 
     private void processOrder(String buyerUsername, double change) {
         try (Connection conn = DBUtil.getConnection()) {
-            conn.setAutoCommit(false); // Start transaction
+            conn.setAutoCommit(false);
 
-            // Insert orders
             String orderQuery = "INSERT INTO orders (Username, productID, Status, Quantity, DateOrdered, Size, totalAmount) " +
                     "SELECT c.Username, c.productID, 'To Ship', c.quantity, ?, c.size, c.totalAmount " +
                     "FROM cart c " +
@@ -154,20 +151,19 @@ public class CartController {
                     return;
                 }
 
-                // Clear cart
                 String clearCartQuery = "DELETE FROM cart WHERE Username = ?";
                 try (PreparedStatement clearStmt = conn.prepareStatement(clearCartQuery)) {
                     clearStmt.setString(1, buyerUsername);
                     clearStmt.executeUpdate();
                 }
 
-                conn.commit(); // Commit transaction
+                conn.commit();
                 System.out.println("Checkout successful. Change: ₱" + change);
 
                 loadCart(buyerUsername); // Refresh cart
 
             } catch (SQLException e) {
-                conn.rollback(); // Rollback transaction in case of error
+                conn.rollback();
                 e.printStackTrace();
                 showAlert("Checkout Failed", "There was an issue processing your order. Please try again.");
             }

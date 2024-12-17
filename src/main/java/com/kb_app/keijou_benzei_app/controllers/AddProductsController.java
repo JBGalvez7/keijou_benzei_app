@@ -16,9 +16,9 @@ public class AddProductsController {
 
     private String productIdForEdit = null;
 
-    // Method to populate the form for editing a product
+
     public void setProductForEdit(String productId, String productName, double price, String picture) {
-        productIdForEdit = productId; // Set ID to know we're in edit mode
+        productIdForEdit = productId;
         nameField.setText(productName);
         priceField.setText(String.valueOf(price));
         pictureField.setText(picture);
@@ -30,7 +30,7 @@ public class AddProductsController {
         String priceText = priceField.getText().trim();
         String pictureUrl = pictureField.getText().trim();
 
-        // Validate inputs
+
         if (productName.isEmpty() || priceText.isEmpty()) {
             showAlert("Validation Error", "Product name and price are required.");
             return;
@@ -46,7 +46,6 @@ public class AddProductsController {
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "")) {
             if (productIdForEdit != null) {
-                // Update the product
                 String updateQuery = "UPDATE product SET name = ?, price = ?, picture = ? WHERE productID = ?";
                 try (PreparedStatement stmt = conn.prepareStatement(updateQuery)) {
                     stmt.setString(1, productName);
@@ -56,7 +55,6 @@ public class AddProductsController {
                     stmt.executeUpdate();
                 }
             } else {
-                // Insert a new product
                 String insertQuery = "INSERT INTO product (name, price, picture) VALUES (?, ?, ?)";
                 try (PreparedStatement stmt = conn.prepareStatement(insertQuery)) {
                     stmt.setString(1, productName);
@@ -70,13 +68,11 @@ public class AddProductsController {
             showAlert("Database Error", "Failed to save the product.");
         }
 
-        // Close the window after saving
         ((Stage) nameField.getScene().getWindow()).close();
     }
 
     @FXML
     private void handleCancel() {
-        // Close the form without saving
         ((Stage) nameField.getScene().getWindow()).close();
     }
 

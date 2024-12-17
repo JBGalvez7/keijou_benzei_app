@@ -57,10 +57,10 @@ public class SellerController {
     }
 
     private void loadSellerStats() {
-        // Calculate Today's Income, Total Income, and Products Sold
+
         double todayIncome = calculateTodayIncome();
-        double totalIncome = todayIncome + 12527.45; // Total Income is today's income + a fixed value
-        int productsSold = calculateTotalProductsSold() + 247; // Products Sold is total quantity + a fixed value
+        double totalIncome = todayIncome + 12527.45;
+        int productsSold = calculateTotalProductsSold() + 247;
 
         lblTodayIncome.setText("₱" + String.format("%.2f", todayIncome));
         lblTotalIncome.setText("₱" + String.format("%.2f", totalIncome));
@@ -69,7 +69,7 @@ public class SellerController {
 
     private double calculateTodayIncome() {
         double todayIncome = 0;
-        String query = "SELECT totalAmount FROM orders WHERE DateOrdered = CURDATE()"; // Today's orders only
+        String query = "SELECT totalAmount FROM orders WHERE DateOrdered = CURDATE()";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
              Statement stmt = conn.createStatement();
@@ -86,7 +86,7 @@ public class SellerController {
 
     private int calculateTotalProductsSold() {
         int totalProductsSold = 0;
-        String query = "SELECT Quantity FROM orders"; // All orders for total quantity
+        String query = "SELECT Quantity FROM orders";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
              Statement stmt = conn.createStatement();
@@ -125,7 +125,7 @@ public class SellerController {
 
     private void loadRecentOrders() {
         recentOrders = FXCollections.observableArrayList();
-        String query = "SELECT * FROM orders ORDER BY DateOrdered DESC LIMIT 5"; // Modify the query as needed
+        String query = "SELECT * FROM orders ORDER BY DateOrdered DESC LIMIT 5";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
              Statement stmt = conn.createStatement();
@@ -135,7 +135,7 @@ public class SellerController {
                 String orderId = rs.getString("OrderID");
                 String customerName = rs.getString("Username");
                 double amount = rs.getDouble("totalAmount");
-                String productName = "Product " + rs.getString("ProductID"); // You can join with another table for product name
+                String productName = "Product " + rs.getString("ProductID");
                 int quantity = rs.getInt("Quantity");
 
                 recentOrders.add(new RecentOrder(orderId, customerName, amount, productName, quantity));
@@ -165,7 +165,7 @@ public class SellerController {
     }
 
     private void loadTopProducts() {
-        // Count the frequency of each product sold
+
         Map<String, Integer> productSalesCount = new HashMap<>();
         String query = "SELECT ProductID, SUM(Quantity) AS totalSales FROM orders GROUP BY ProductID ORDER BY totalSales DESC LIMIT 5";
 
@@ -176,7 +176,7 @@ public class SellerController {
             while (rs.next()) {
                 String productId = rs.getString("ProductID");
                 int totalSales = rs.getInt("totalSales");
-                String productName = "Product " + productId; // Replace with actual product name from product table if needed
+                String productName = "Product " + productId;
                 productSalesCount.put(productName, totalSales);
             }
 
@@ -228,7 +228,7 @@ public class SellerController {
         }
     }
 
-    // Define the TopProduct class
+
     public static class TopProduct {
         private final String productName;
         private final int sales;
@@ -247,7 +247,7 @@ public class SellerController {
         }
     }
 
-    // Define the RecentOrder class
+
     public static class RecentOrder {
         private final String orderId;
         private final String customerName;

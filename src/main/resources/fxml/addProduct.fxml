@@ -12,7 +12,6 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <!-- Form labels and input fields -->
     <Label text="Product Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
     <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
@@ -22,7 +21,7 @@
     <Label text="Picture URL:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
     <TextField fx:id="pictureField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-    <!-- Save and Cancel buttons -->
+
     <Button text="Save" onAction="#handleSave" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     <Button text="Cancel" onAction="#handleCancel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 </GridPane>

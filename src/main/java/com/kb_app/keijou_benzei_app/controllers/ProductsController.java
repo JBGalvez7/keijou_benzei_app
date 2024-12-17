@@ -99,13 +99,11 @@ public class ProductsController {
         if (selectedProduct != null) {
             System.out.println("Editing product: " + selectedProduct.getProductName());
 
-            // Open the AddProduct form to edit this product
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addProduct.fxml"));
                 Parent root = loader.load();
                 AddProductsController addProductsController = loader.getController();
 
-                // Pass product data for editing
                 addProductsController.setProductForEdit(
                         String.valueOf(selectedProduct.getProductID()),
                         selectedProduct.getProductName(),
@@ -128,7 +126,6 @@ public class ProductsController {
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
 
         if (selectedProduct != null) {
-            // Confirm deletion with a dialog
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Product");
             alert.setHeaderText("Are you sure you want to delete this product?");
@@ -136,7 +133,6 @@ public class ProductsController {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    // Delete product from database
                     String deleteQuery = "DELETE FROM product WHERE productID = ?";
                     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
                          PreparedStatement stmt = conn.prepareStatement(deleteQuery)) {
@@ -144,7 +140,6 @@ public class ProductsController {
                         stmt.setInt(1, selectedProduct.getProductID());
                         stmt.executeUpdate();
 
-                        // Remove product from table view
                         productsTable.getItems().remove(selectedProduct);
                         System.out.println("Product deleted: " + selectedProduct.getProductName());
                     } catch (Exception e) {

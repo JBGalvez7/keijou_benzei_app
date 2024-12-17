@@ -9,7 +9,6 @@ public class Product {
     private final DoubleProperty price;
     private final StringProperty picture;
 
-    // Constructor
     public Product(int productID, String productName, double price, String picture) {
         this.productID = new SimpleIntegerProperty(productID);
         this.productName = new SimpleStringProperty(productName);
@@ -17,7 +16,7 @@ public class Product {
         this.picture = new SimpleStringProperty(picture);
     }
 
-    // Getters and Property Methods
+
     public int getProductID() {
         return productID.get();
     }

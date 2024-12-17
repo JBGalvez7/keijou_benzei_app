@@ -39,7 +39,7 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            errorMessage.setVisible(true); // Show the error message
+            errorMessage.setVisible(true);
         }
     }
 

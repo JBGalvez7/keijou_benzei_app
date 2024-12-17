@@ -70,7 +70,7 @@ public class ProductPreviewController {
                 "SLC NSTP Uniform.jpg"
         };
 
-        // Set product details based on the productID
+
         productName = productNames[productID];
         productPrice = productPrices[productID];
 
@@ -78,13 +78,13 @@ public class ProductPreviewController {
         productPriceText.setText("₱" + productPrice);
         productImageView.setImage(new Image(getClass().getResourceAsStream("/images/" + imagePaths[productID])));
 
-        // Populate size ComboBox
+
         sizeComboBox.getItems().clear();
         sizeComboBox.getItems().addAll("XS", "S", "M", "L", "XL");
     }
 
 
-    // Handle Add to Cart button click
+
     @FXML
     private void addToCart() {
         String selectedSize = sizeComboBox.getValue();
@@ -109,11 +109,11 @@ public class ProductPreviewController {
                 checkStmt.setInt(1, productID);
                 ResultSet rs = checkStmt.executeQuery();
                 if (rs.next() && rs.getInt(1) > 0) {
-                    // Product exists, proceed to add to cart
+
                     String query = "INSERT INTO cart (Username, productID, Quantity, Size, totalAmount, Status) " +
-                            "VALUES (?, ?, ?, ?, ?, 'In Cart');"; // 'In Cart' as status
+                            "VALUES (?, ?, ?, ?, ?, 'In Cart');";
                     try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                        stmt.setString(1, "user"); // Replace with the actual username
+                        stmt.setString(1, "user");
                         stmt.setInt(2, productID);
                         stmt.setInt(3, quantity);
                         stmt.setString(4, selectedSize);
@@ -122,7 +122,7 @@ public class ProductPreviewController {
                         System.out.println("Added to cart successfully.");
                     }
                 } else {
-                    // Product does not exist, show an error or handle the case
+
                     System.out.println("Product not found.");
                 }
             }
@@ -133,7 +133,6 @@ public class ProductPreviewController {
 
 
 
-    // Handle Buy Now button click
     @FXML
     private void buyNow() {
         String selectedSize = sizeComboBox.getValue();
@@ -187,7 +186,6 @@ public class ProductPreviewController {
                         System.out.println("Order placed successfully.");
                         System.out.println("Change: ₱" + change);
 
-                        // Redirect to orders screen (optional)
                         Stage stage = (Stage) productNameText.getScene().getWindow();
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/orders.fxml"));
                         Parent root = loader.load();
