@@ -20,36 +20,37 @@ public class OrdersController {
     @FXML
     private ListView<String> ordersListView;
 
-    public void loadOrders(int buyerID) {
+    public void loadOrders(String buyerUsername) {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kb_app_db", "root", "");
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT o.orderID, p.name, o.status, o.dateOrdered " +
+                     "SELECT o.orderID, p.name, o.status, o.dateOrdered, o.totalAmount " +
                              "FROM orders o " +
-                             "JOIN products p ON o.productID = p.productID " +
-                             "WHERE o.buyerID = ?"
+                             "JOIN product p ON o.productID = p.productID " +
+                             "WHERE o.Username = ?"
              )) {
-            stmt.setInt(1, buyerID);
+            stmt.setString(1, buyerUsername);  // Use the correct column (Username)
             ResultSet rs = stmt.executeQuery();
-
             ordersListView.getItems().clear();
             while (rs.next()) {
                 int orderID = rs.getInt("orderID");
                 String productName = rs.getString("name");
                 String status = rs.getString("status");
                 String dateOrdered = rs.getString("dateOrdered");
+                double totalAmount = rs.getDouble("totalAmount");
 
                 ordersListView.getItems().add("Order ID: " + orderID + "\nProduct: " + productName +
-                        "\nStatus: " + status + "\nDate: " + dateOrdered + "\n");
+                        "\nStatus: " + status + "\nDate: " + dateOrdered + "\nTotal Amount: " + totalAmount + "\n");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
     @FXML
     public void initialize() {
-        int buyerID = 1;
-        loadOrders(buyerID);
+        String buyerUsername = "user";
+        loadOrders(buyerUsername);
     }
 
 
@@ -83,12 +84,13 @@ public class OrdersController {
         }
 
         @FXML
-        private void browseProducts (ActionEvent event){
+        private void viewCart (ActionEvent event){
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buyer.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cart.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
+                stage.setMaximized(true);
                 stage.setTitle("Seller Section");
                 stage.show();
             } catch (Exception e) {

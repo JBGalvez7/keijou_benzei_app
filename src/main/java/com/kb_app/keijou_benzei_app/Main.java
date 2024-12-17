@@ -12,15 +12,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 420, 350);
+        Scene scene = new Scene(fxmlLoader.load(), 750, 500);
         stage.setTitle("App Login");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-
-        (new Database()).generateUser("user", "1234");
+       // (new Database()).generateUser("admin", "admin1234");
         launch();
     }
 

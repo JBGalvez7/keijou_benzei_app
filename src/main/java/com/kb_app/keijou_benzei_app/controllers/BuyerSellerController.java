@@ -15,22 +15,33 @@ public class BuyerSellerController {
     private Scene scene;
 
     @FXML
-    public void handleBuyer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/buyer.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Buyer Section");
-        stage.setScene(scene);
-        stage.show();
+    private void handleBuyer (ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buyer.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seller - Messages");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Messages screen...");
     }
 
-    public void handleSeller(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/seller.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Seller Selection");
-        stage.setScene(scene);
-        stage.show();
+    @FXML
+    private void handleSeller (ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/seller.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seller - Messages");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Messages screen...");
     }
 }
 

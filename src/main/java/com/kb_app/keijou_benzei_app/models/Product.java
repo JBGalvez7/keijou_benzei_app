@@ -1,122 +1,52 @@
 package com.kb_app.keijou_benzei_app.models;
 
+import javafx.beans.property.*;
+
 public class Product {
-    private int productID;
-    private String name;
-    private double price;
-    private String pictureUrl;
-    private String category;
-    private String style;
-    private String size;
-    private String agePreference;
-    private String gender;
-    private double ratings;
-    private int soldCount;
-    private int sellerID;
 
-    public Product(String name, double price, String category) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
+    private final IntegerProperty productID;
+    private final StringProperty productName;
+    private final DoubleProperty price;
+    private final StringProperty picture;
+
+    // Constructor
+    public Product(int productID, String productName, double price, String picture) {
+        this.productID = new SimpleIntegerProperty(productID);
+        this.productName = new SimpleStringProperty(productName);
+        this.price = new SimpleDoubleProperty(price);
+        this.picture = new SimpleStringProperty(picture);
     }
 
-    public Product() {
-
-    }
-
+    // Getters and Property Methods
     public int getProductID() {
+        return productID.get();
+    }
+
+    public IntegerProperty productIDProperty() {
         return productID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public String getProductName() {
+        return productName.get();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public StringProperty productNameProperty() {
+        return productName;
     }
 
     public double getPrice() {
+        return price.get();
+    }
+
+    public DoubleProperty priceProperty() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public String getPicture() {
+        return picture.get();
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getAgePreference() {
-        return agePreference;
-    }
-
-    public void setAgePreference(String agePreference) {
-        this.agePreference = agePreference;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public double getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(double ratings) {
-        this.ratings = ratings;
-    }
-
-    public int getSoldCount() {
-        return soldCount;
-    }
-
-    public void setSoldCount(int soldCount) {
-        this.soldCount = soldCount;
-    }
-
-    public int getSellerID() {
-        return sellerID;
-    }
-
-    public void setSellerID(int sellerID) {
-        this.sellerID = sellerID;
+    public StringProperty pictureProperty() {
+        return picture;
     }
 }

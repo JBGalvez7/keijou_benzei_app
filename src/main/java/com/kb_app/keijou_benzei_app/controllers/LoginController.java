@@ -1,6 +1,5 @@
 package com.kb_app.keijou_benzei_app.controllers;
 
-import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import com.kb_app.keijou_benzei_app.utility.Database;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class LoginController {
 
@@ -29,8 +22,6 @@ public class LoginController {
     @FXML
     private Text errorMessage;
 
-    private Database database = new Database();
-
     @FXML
     private void handleLogin(ActionEvent event) {
         String username = usernameField.getText();
@@ -38,8 +29,8 @@ public class LoginController {
 
         if (isValidLogin(username, password)) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/buyerseller.fxml"));
-                Scene buyerSellerScene = new Scene(fxmlLoader.load(), 420, 350);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/purchaseManage.fxml"));
+                Scene buyerSellerScene = new Scene(fxmlLoader.load());
 
                 Stage currentStage = (Stage) usernameField.getScene().getWindow();
                 currentStage.setScene(buyerSellerScene);
@@ -48,27 +39,12 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            errorMessage.setText("Invalid Username or Password. Try Again");
+            errorMessage.setVisible(true); // Show the error message
         }
     }
 
+
     private boolean isValidLogin(String username, String password) {
-        String query = "SELECT password FROM user WHERE username = ?";
-        try (Connection conn = database.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                String hashedPassword = rs.getString("password");
-                return BCrypt.checkpw(password, hashedPassword);
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        return username.equals("user") && password.equals("1234");
     }
 }

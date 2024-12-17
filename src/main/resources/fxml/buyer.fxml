@@ -4,21 +4,26 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.BuyerController">
+<BorderPane fx:id="mainBorderPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #dfe9f3);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.BuyerController">
 
     <left>
         <VBox alignment="CENTER" prefWidth="200.0" spacing="20" style="-fx-background-color: #333; -fx-padding: 20; -fx-min-height: 100%; -fx-min-width: 100%;">
             <children>
-                <Text style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Navigation" />
-                <Button onAction="#handleBack" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Back" />
+                <Button onAction="#handleBack" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Back" textFill="#d70000">
+                    <font>
+                        <Font name="Eras Bold ITC" size="20.0" />
+                    </font>
+                </Button>
                 <Button onAction="#viewOrders" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Orders" />
                 <Button onAction="#viewMessages" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Messages" />
-                <Button onAction="#browseProducts" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Browse" />
+                <Button onAction="#viewCart" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #555;" text="Cart" />
             </children>
         </VBox>
     </left>
@@ -39,89 +44,118 @@
 
                 <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: transparent; -fx-padding: 10;" VBox.vgrow="ALWAYS">
                     <content>
-                        <GridPane alignment="TOP_LEFT" hgap="20.0" vgap="20.0" style="-fx-padding: 20;">
+                        <GridPane alignment="TOP_LEFT" hgap="20.0" style="-fx-padding: 20;" vgap="20.0">
                             <children>
-                                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                     <children>
                                         <ImageView fx:id="product1ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="1" />
+                                        <Text fx:id="product1Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="1" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                     <children>
                                         <ImageView fx:id="product2ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="2" />
+                                        <Text fx:id="product2Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="2" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                     <children>
                                         <ImageView fx:id="product3ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="3" />
+                                        <Text fx:id="product3Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="3" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnIndex="3" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
                                     <children>
                                         <ImageView fx:id="product4ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
+                                        <Text fx:id="product4Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                     <children>
                                         <ImageView fx:id="product5ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="5" />
+                                        <Text fx:id="product5Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-
-                                <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <children>
                                         <ImageView fx:id="product6ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="6" />
+                                        <Text fx:id="product6Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-                                <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                     <children>
                                         <ImageView fx:id="product7ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="7" />
+                                        <Text fx:id="product7Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-
-                                <VBox GridPane.columnIndex="3" GridPane.rowIndex="1" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                     <children>
                                         <ImageView fx:id="product8ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="8" />
+                                        <Text fx:id="product8Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-
-                                <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
                                     <children>
                                         <ImageView fx:id="product9ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="9" />
+                                        <Text fx:id="product9Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-
-                                <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <children>
                                         <ImageView fx:id="product10ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="10" />
+                                        <Text fx:id="product10Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-
-                                <VBox GridPane.columnIndex="2" GridPane.rowIndex="2" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                     <children>
                                         <ImageView fx:id="product11ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="11" />
+                                        <Text fx:id="product11Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
-
-                                <VBox GridPane.columnIndex="3" GridPane.rowIndex="2" alignment="CENTER" spacing="10.0">
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                     <children>
                                         <ImageView fx:id="product12ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
-                                        <Text style="-fx-font-size: 16px; -fx-text-fill: #333;" text="12" />
+                                        <Text fx:id="product12Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                    <children>
+                                        <ImageView fx:id="product13ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
+                                        <Text fx:id="product13Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <children>
+                                        <ImageView fx:id="product14ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
+                                        <Text fx:id="product14Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                    <children>
+                                        <ImageView fx:id="product15ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
+                                        <Text fx:id="product15Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                    <children>
+                                        <ImageView fx:id="product16ImageView" fitHeight="400.0" fitWidth="390.0" style="-fx-cursor: hand;" />
+                                        <Text fx:id="product16Text" style="-fx-font-size: 16px; -fx-text-fill: #333;" text="4" />
                                     </children>
                                 </VBox>
 
 
                             </children>
+                            <columnConstraints>
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                            </rowConstraints>
                         </GridPane>
                     </content>
                 </ScrollPane>

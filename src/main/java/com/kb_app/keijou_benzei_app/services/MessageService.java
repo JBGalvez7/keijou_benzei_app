@@ -33,13 +33,12 @@ public class MessageService {
     }
 
     public void sendMessage(String content) {
-        String query = "INSERT INTO message (senderID, content) VALUES (?, ?)";
+        String query = "INSERT INTO message (content) VALUES (?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setInt(1, 1);
-            pstmt.setString(2, content);
+            pstmt.setString(1, content);
 
             pstmt.executeUpdate();
 

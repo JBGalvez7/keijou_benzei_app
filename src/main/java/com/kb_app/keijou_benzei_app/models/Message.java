@@ -5,13 +5,11 @@ import java.sql.Timestamp;
 public class Message {
 
     private int messageID;
-    private int senderID;
     private String content;
     private Timestamp timestamp;
 
     public Message(int messageID, int senderID, String content, Timestamp timestamp) {
         this.messageID = messageID;
-        this.senderID = senderID;
         this.content = content;
         this.timestamp = timestamp;
     }
@@ -26,14 +24,6 @@ public class Message {
 
     public void setMessageID(int messageID) {
         this.messageID = messageID;
-    }
-
-    public int getSenderID() {
-        return senderID;
-    }
-
-    public void setSenderID(int senderID) {
-        this.senderID = senderID;
     }
 
     public String getContent() {

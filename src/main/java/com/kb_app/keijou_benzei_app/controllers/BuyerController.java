@@ -2,212 +2,194 @@ package com.kb_app.keijou_benzei_app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import javafx.fxml.FXMLLoader;
 
 public class BuyerController {
 
-    @FXML
-    private ImageView product1ImageView;
-    @FXML
-    private ImageView product2ImageView;
-    @FXML
-    private ImageView product3ImageView;
-    @FXML
-    private ImageView product4ImageView;
-    @FXML
-    private ImageView product5ImageView;
-    @FXML
-    private ImageView product6ImageView;
-    @FXML
-    private ImageView product7ImageView;
-    @FXML
-    private ImageView product8ImageView;
-    @FXML
-    private ImageView product9ImageView;
-    @FXML
-    private ImageView product10ImageView;
-    @FXML
-    private ImageView product11ImageView;
-    @FXML
-    private ImageView product12ImageView;
+    @FXML private ImageView product1ImageView;
+    @FXML private ImageView product2ImageView;
+    @FXML private ImageView product3ImageView;
+    @FXML private ImageView product4ImageView;
+    @FXML private ImageView product5ImageView;
+    @FXML private ImageView product6ImageView;
+    @FXML private ImageView product7ImageView;
+    @FXML private ImageView product8ImageView;
+    @FXML private ImageView product9ImageView;
+    @FXML private ImageView product10ImageView;
+    @FXML private ImageView product11ImageView;
+    @FXML private ImageView product12ImageView;
+    @FXML private ImageView product13ImageView;
+    @FXML private ImageView product14ImageView;
+    @FXML private ImageView product15ImageView;
+    @FXML private ImageView product16ImageView;
 
-    private final Map<Integer, Product> productMap = new HashMap<>();
+    @FXML private Text product1Text;
+    @FXML private Text product2Text;
+    @FXML private Text product3Text;
+    @FXML private Text product4Text;
+    @FXML private Text product5Text;
+    @FXML private Text product6Text;
+    @FXML private Text product7Text;
+    @FXML private Text product8Text;
+    @FXML private Text product9Text;
+    @FXML private Text product10Text;
+    @FXML private Text product11Text;
+    @FXML private Text product12Text;
+    @FXML private Text product13Text;
+    @FXML private Text product14Text;
+    @FXML private Text product15Text;
+    @FXML private Text product16Text;
 
-    @FXML
+    private static final String[] PRODUCT_NAMES = {
+            "CICOSAT Criminology Gala Uniform (Pants)", "CICOSAT Criminology Gala Uniform (Top)",
+            "DMMMSU Computer Science Departmental Uniform (Top)", "DMMMSU Computer Science Departmental Uniform (Pants)",
+            "Lorma Colleges Institutional Uniform", "Lorma Colleges PE Uniform",
+            "Lorma Colleges Nursing Departmental Uniform", "Lorma Colleges CCSE Departmental Uniform",
+            "Lorma Colleges Nursing Gala Uniform (Female)", "SLC PE Shirt",
+            "SLC Gala Uniform (Female - Skirt)", "SLC Gala Uniform (Female - Top)",
+            "SLC CSA Departmental Uniform", "SLC CEA Departmental Uniform",
+            "DMMMSU Pathfit Uniform", "SLC NSTP Uniform"
+    };
+
+    private static final String[] IMAGE_PATHS = {
+            "CICOSAT Criminology Gala Uniform (Pants).jpg", "CICOSAT Criminology Gala Uniform (Top).jpg",
+            "DMMMSU Computer Science Departmental Uniform (Top).jpg", "DMMMSU Computer Science Departmental Uniform (Pants).jpg",
+            "Lorma Colleges Institutional Uniform.jpg", "Lorma Colleges PE Uniform.jpg",
+            "Lorma Colleges Nursing Departmental Uniform.jpg", "Lorma Colleges CCSE Departmental Uniform.jpg",
+            "Lorma Colleges Nursing Gala Uniform (Female).jpg", "SLC PE Shirt.jpg",
+            "SLC Gala Uniform (Female - Skirt).jpg", "SLC Gala Uniform (Female - Top).jpg",
+            "SLC CSA Departmental Uniform.jpg", "SLC CEA Departmental Uniform.jpg",
+            "DMMMSU Pathfit Uniform.jpg", "SLC NSTP Uniform.jpg"
+    };
+
+    private static final double[] PRICES = {
+            250, 450, 300, 200, 250, 200, 300, 300, 500, 250, 250, 300, 300, 300, 250, 250
+    };
+
+    // Method to load product data into the FXML components
     public void initialize() {
-        loadProductData();
-
-        setupProductImages();
+        loadProduct(0, product1ImageView, product1Text);
+        loadProduct(1, product2ImageView, product2Text);
+        loadProduct(2, product3ImageView, product3Text);
+        loadProduct(3, product4ImageView, product4Text);
+        loadProduct(4, product5ImageView, product5Text);
+        loadProduct(5, product6ImageView, product6Text);
+        loadProduct(6, product7ImageView, product7Text);
+        loadProduct(7, product8ImageView, product8Text);
+        loadProduct(8, product9ImageView, product9Text);
+        loadProduct(9, product10ImageView, product10Text);
+        loadProduct(10, product11ImageView, product11Text);
+        loadProduct(11, product12ImageView, product12Text);
+        loadProduct(12, product13ImageView, product13Text);
+        loadProduct(13, product14ImageView, product14Text);
+        loadProduct(14, product15ImageView, product15Text);
+        loadProduct(15, product16ImageView, product16Text);
     }
 
-    private void loadProductData() {
-        productMap.put(1, new Product(1, "Korean Style Silk Short Sleeves button mens shirt", "150.00", "Men's Wear", "M", "Unisex", "Adult", "images/Korean Style Silk Short Sleeves button mens shirt.jpg"));
-        productMap.put(2, new Product(2, "Women Korean Black Coat or Blazer", "120.00", "Women's Wear", "M", "F", "Young Adult", "images/WOMEN KOREAN BLACK COAT or BLAZER.jpg"));
-        productMap.put(3, new Product(3, "Womens Graphic Oversized Crewneck Sweatshirt", "180.00", "Casual Wear", "F", "F", "Teen", "images/Womens Graphic Oversized Crewneck Long Sleeve Casual Loose Pullover Los Angeles California Vintage Sweatshirts Coffee Brown Plus Size.jpg"));
-        productMap.put(4, new Product(4, "Navy Blue Shirt Women New Autumn High End Temperament V Neck", "150.00", "Formal Wear", "M", "F", "Adult", "images/Navy Blue Shirt Women New Autumn High End Temperament V Neck.jpg"));
-        productMap.put(5, new Product(5, "Original Design Blue V Neck Cross Patchwork Shirt", "170.00", "Formal Wear", "S", "F", "Young Adult", "images/5.12Original Design Blue V Neck Cross Patchwork Cold Shoulder Cotton Shirts Spring.jpg"));
-        productMap.put(6, new Product(6, "Vertical Knitted Short Sleeve Collar Shirt", "130.00", "Men's Wear", "M", "M", "Young Adult", "images/VERTICAL KNITTED SHORT SLEEVE COLLAR SHIRT.jpg"));
-        productMap.put(7, new Product(7, "Oversized Multi Pocket Half Shirt", "130.00", "Casual Wear", "M", "Unisex", "Young Adult", "images/Oversized Multi Pocket Half Shirt.jpg"));
-        productMap.put(8, new Product(8, "Young Girl Plaid Print Belted Dress", "150.00", "Dresses", "F", "F", "Teen", "images/Young Girl Plaid Print Belted Dress.jpg"));
-        productMap.put(9, new Product(9, "Mens Striped Polo Shirt", "140.00", "Men's Wear", "M", "M", "Young Adult", "images/Mens Striped Polo Shirt Short Sleeve Summer Lapel Ice Silk Korean-style T-Shirt.jpg"));
-        productMap.put(10, new Product(10, "Young Boy Casual Crown Pattern Polo Shirt", "80.00", "Kids Wear", "S", "M", "Toddler", "images/1pc Young Boy Casual College Style Crown Pattern Long Sleeve Polo Shirt.jpg"));
-        productMap.put(11, new Product(11, "Women Short Sleeve Thin Casual Fashion Loose Shirt", "140.00", "Women's Wear", "M", "F", "Elder", "images/Women Short Sleeve Thin Casual Fashion Loose Shirt.jpg"));
-        productMap.put(12, new Product(12, "Mens Long-Sleeved Shirts High-End Drape Casual Shirt", "180.00", "Men's Wear", "M", "M", "Young Adult", "images/Mens Long-Sleeved Shirts High-End Drape Casual Shirt.jpg"));
+    // Helper method to load a product into an ImageView and Text
+    private void loadProduct(int index, ImageView imageView, Text text) {
+        String imagePath = "/images/" + IMAGE_PATHS[index];
+        imageView.setImage(new Image(getClass().getResourceAsStream(imagePath)));
+        text.setText(PRODUCT_NAMES[index] + "\n₱" + PRICES[index]);
+
+        // Set action for clicking the image
+        imageView.setOnMouseClicked(event -> showProductDetails(index));
     }
 
-
-    private void setupProductImages() {
-        setupImageView(product1ImageView, 1);
-        setupImageView(product2ImageView, 2);
-        setupImageView(product3ImageView, 3);
-        setupImageView(product4ImageView, 4);
-        setupImageView(product5ImageView, 5);
-        setupImageView(product6ImageView, 6);
-        setupImageView(product7ImageView, 7);
-        setupImageView(product8ImageView, 8);
-        setupImageView(product9ImageView, 9);
-        setupImageView(product10ImageView, 10);
-        setupImageView(product11ImageView, 11);
-        setupImageView(product12ImageView, 12);
-    }
-
-    private void setupImageView(ImageView imageView, int productId) {
-        Product product = productMap.get(productId);
-        if (product != null) {
-            imageView.setImage(loadImage(product.getImagePath()));
-            imageView.setOnMouseClicked(event -> handleProductClick(product));
-        }
-    }
-
-    private Image loadImage(String relativePath) {
-        InputStream imageStream = getClass().getResourceAsStream("/" + relativePath);
-        if (imageStream != null) {
-            return new Image(imageStream);
-        } else {
-            System.err.println("Image not found: " + relativePath);
-            return new Image(getClass().getResource("/images/default_placeholder.jpg").toExternalForm());
-        }
-    }
-
-    private void handleProductClick(Product product) {
+    // Show product details and navigate to ProductPreview.fxml
+    private void showProductDetails(int index) {
         try {
+            // Assuming that you are passing productID instead of index
+            int productID = index + 1; // Adjust if necessary to pass correct productID
+
+            // Ensure the product ID is within bounds of your array
+            if (productID < 1 || productID > PRODUCT_NAMES.length) {
+                throw new IllegalArgumentException("Product ID out of bounds");
+            }
+
+            // Load the ProductPreview screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/productPreview.fxml"));
             Parent root = loader.load();
 
+            // Pass product data to ProductPreviewController
             ProductPreviewController controller = loader.getController();
-            controller.setProductDetails(
-                    product.getId(),
-                    product.getName(),
-                    product.getPrice(),
-                    product.getCategory(),
-                    product.getSize(),
-                    product.getGender(),
-                    product.getAgePreference(),
-                    product.getImagePath()
-            );
+            controller.initialize(productID);  // Pass the actual productID
 
             Stage stage = (Stage) product1ImageView.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Product Preview");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleBack(ActionEvent event) {
-        navigateToScene(event, "/fxml/buyerseller.fxml", "Buyer/Seller Selection");
-    }
-
-    @FXML
-    private void viewOrders(ActionEvent event) {
-        navigateToScene(event, "/fxml/orders.fxml", "Buyer - Orders");
-    }
-
-    @FXML
-    private void viewMessages(ActionEvent event) {
-        navigateToScene(event, "/fxml/messages.fxml", "Buyer - Messages");
-    }
-
-    @FXML
-    private void browseProducts(ActionEvent event) {
-        navigateToScene(event, "/fxml/buyer.fxml", "Buyer Section");
-    }
-
-    private void navigateToScene(ActionEvent event, String fxmlPath, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle(title);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static class Product {
-        private final int id;
-        private final String name;
-        private final String price;
-        private final String category;
-        private final String size;
-        private final String gender;
-        private final String agePreference;
-        private final String imagePath;
 
-        public Product(int id, String name, String price, String category, String size, String gender, String agePreference, String imagePath) {
-            this.id = id;
-            this.name = name;
-            this.price = price;
-            this.category = category;
-            this.size = size;
-            this.gender = gender;
-            this.agePreference = agePreference;
-            this.imagePath = imagePath;
+    @FXML
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/purchaseManage.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buyer Section");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        public int getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getPrice() {
-            return price;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-
-        public String getSize() {
-            return size;
-        }
-
-        public String getGender() {
-            return gender;
-        }
-
-        public String getAgePreference() {
-            return agePreference;
-        }
-
-        public String getImagePath() {
-            return imagePath;
-        }
+        System.out.println("Navigating to Buyer screen...");
     }
+
+    @FXML
+    private void viewMessages(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/messages.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buyer - Messages");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Buyer screen...");
+    }
+
+    @FXML
+    private void viewOrders(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/orders.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buyer - Orders");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Buyer screen...");
+    }
+
+    @FXML
+    private void viewCart(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cart.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buyer - Cart");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Navigating to Buyer screen...");
+    }
+
 }

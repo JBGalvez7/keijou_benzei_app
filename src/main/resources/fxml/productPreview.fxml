@@ -1,59 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.text.Text?>
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kb_app.keijou_benzei_app.controllers.ProductPreviewController"
-      style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-spacing: 20; -fx-pref-width: 800;">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.kb_app.keijou_benzei_app.controllers.ProductPreviewController"
+      spacing="15" alignment="center" style="-fx-padding: 20;">
 
-    <children>
-        <VBox alignment="CENTER" prefWidth="200.0" spacing="20"
-              style="-fx-background-color: #2c3e50; -fx-padding: 20;">
-            <children>
-                <Text text="Navigation" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ecf0f1;" />
-                <Button text="Back" onAction="#handleBack"
-                        style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;" />
-                <Button text="Orders" onAction="#handleOrders"
-                        style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;" />
-                <Button text="Messages" onAction="#handleMessages"
-                        style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;" />
-                <Button text="Browse" onAction="#handleBack"
-                        style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;" />
-            </children>
-        </VBox>
+    <!-- Product Name -->
+    <Text fx:id="productNameText" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
-        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20; -fx-background-color: #f4f4f4; -fx-pref-width: 600;">
-            <children>
-                <ImageView fx:id="productImageView" fitHeight="300" fitWidth="300" style="-fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);" />
+    <!-- Product Image -->
+    <ImageView fx:id="productImageView" fitWidth="200" fitHeight="200" preserveRatio="true" />
 
-                <Label fx:id="productNameLabel" text="Product Name"
-                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+    <!-- Product Price -->
+    <Text fx:id="productPriceText" style="-fx-font-size: 18px;" />
 
-                <Label fx:id="productPriceLabel" text="Price: ₱100.00"
-                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;" />
+    <!-- Size Selection -->
+    <ComboBox fx:id="sizeComboBox" promptText="Select Size" prefWidth="150" />
 
-                <VBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10;">
-                    <children>
-                        <Label fx:id="productCategoryLabel" text="Category: " style="-fx-font-size: 16px;" />
-                        <Label fx:id="productSizeLabel" text="Size: " style="-fx-font-size: 16px;" />
-                        <Label fx:id="productGenderLabel" text="Gender: " style="-fx-font-size: 16px;" />
-                        <Label fx:id="productAgePrefLabel" text="Age Preference: " style="-fx-font-size: 16px;" />
-                    </children>
-                </VBox>
+    <!-- Quantity Input -->
+    <TextField fx:id="quantityTextField" promptText="Enter Quantity" prefWidth="150" />
 
-                <HBox spacing="20" alignment="CENTER">
-                    <children>
-                        <Button fx:id="buyNowButton" text="Buy Now" onAction="#handleBuyNow"
-                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 20;" />
-                        <Button fx:id="addToCartButton" text="Add to Cart" onAction="#handleAddToCart"
-                                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 20;" />
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </children>
-</HBox>
+    <!-- Buttons Section -->
+    <VBox spacing="10" alignment="center">
+        <Button fx:id="addToCart" text="Add to Cart" onAction="#addToCart"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button fx:id="buyNow" text="Buy Now" onAction="#buyNow"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+        <Button fx:id="handleBack" text="Back" onAction="#handleBack"
+                style="-fx-background-color: #F44336; -fx-text-fill: white;" />
+    </VBox>
+</VBox>

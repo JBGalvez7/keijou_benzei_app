@@ -100,9 +100,9 @@ public class MessagesController {
     }
 
     @FXML
-    private void handleBrowse(ActionEvent event) {
+    private void handleCart(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buyer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cart.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

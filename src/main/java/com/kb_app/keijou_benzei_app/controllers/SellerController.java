@@ -1,5 +1,7 @@
 package com.kb_app.keijou_benzei_app.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,12 +11,18 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SellerController {
 
@@ -28,16 +36,69 @@ public class SellerController {
     private BarChart<String, Number> productSalesChart;
 
     @FXML
-    public void initialize() {
+    private TableView<TopProduct> topProductsTable;
+
+    @FXML
+    private TableView<RecentOrder> recentOrdersTable;
+
+    private ObservableList<RecentOrder> recentOrders;
+
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/kb_app_db"; // Your DB URL
+    private static final String DB_USERNAME = "root"; // Your DB username
+    private static final String DB_PASSWORD = ""; // Your DB password
+
+    @FXML
+    private void initialize() {
         loadSellerStats();
         loadIncomeChart();
         loadProductSalesChart();
+        loadRecentOrders();
+        loadTopProducts();
     }
 
     private void loadSellerStats() {
-        lblTodayIncome.setText("₱1989.13");
-        lblTotalIncome.setText("₱21,117.85");
-        lblProductsSold.setText("66");
+        // Calculate Today's Income, Total Income, and Products Sold
+        double todayIncome = calculateTodayIncome();
+        double totalIncome = todayIncome + 12527.45; // Total Income is today's income + a fixed value
+        int productsSold = calculateTotalProductsSold() + 247; // Products Sold is total quantity + a fixed value
+
+        lblTodayIncome.setText("₱" + String.format("%.2f", todayIncome));
+        lblTotalIncome.setText("₱" + String.format("%.2f", totalIncome));
+        lblProductsSold.setText(String.valueOf(productsSold));
+    }
+
+    private double calculateTodayIncome() {
+        double todayIncome = 0;
+        String query = "SELECT totalAmount FROM orders WHERE DateOrdered = CURDATE()"; // Today's orders only
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                todayIncome += rs.getDouble("totalAmount");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return todayIncome;
+    }
+
+    private int calculateTotalProductsSold() {
+        int totalProductsSold = 0;
+        String query = "SELECT Quantity FROM orders"; // All orders for total quantity
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                totalProductsSold += rs.getInt("Quantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalProductsSold;
     }
 
     private void loadIncomeChart() {
@@ -62,9 +123,86 @@ public class SellerController {
         productSalesChart.getData().add(series);
     }
 
+    private void loadRecentOrders() {
+        recentOrders = FXCollections.observableArrayList();
+        String query = "SELECT * FROM orders ORDER BY DateOrdered DESC LIMIT 5"; // Modify the query as needed
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                String orderId = rs.getString("OrderID");
+                String customerName = rs.getString("Username");
+                double amount = rs.getDouble("totalAmount");
+                String productName = "Product " + rs.getString("ProductID"); // You can join with another table for product name
+                int quantity = rs.getInt("Quantity");
+
+                recentOrders.add(new RecentOrder(orderId, customerName, amount, productName, quantity));
+            }
+
+            TableColumn<RecentOrder, String> orderIdCol = new TableColumn<>("Order ID");
+            orderIdCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+
+            TableColumn<RecentOrder, String> customerNameCol = new TableColumn<>("Customer");
+            customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+
+            TableColumn<RecentOrder, Double> amountCol = new TableColumn<>("Amount");
+            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+            TableColumn<RecentOrder, String> productCol = new TableColumn<>("Product");
+            productCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+            TableColumn<RecentOrder, Integer> quantityCol = new TableColumn<>("Quantity");
+            quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+            recentOrdersTable.getColumns().addAll(orderIdCol, customerNameCol, amountCol, productCol, quantityCol);
+            recentOrdersTable.setItems(recentOrders);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadTopProducts() {
+        // Count the frequency of each product sold
+        Map<String, Integer> productSalesCount = new HashMap<>();
+        String query = "SELECT ProductID, SUM(Quantity) AS totalSales FROM orders GROUP BY ProductID ORDER BY totalSales DESC LIMIT 5";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                String productId = rs.getString("ProductID");
+                int totalSales = rs.getInt("totalSales");
+                String productName = "Product " + productId; // Replace with actual product name from product table if needed
+                productSalesCount.put(productName, totalSales);
+            }
+
+            ObservableList<TopProduct> sortedTopProducts = FXCollections.observableArrayList(
+                    productSalesCount.entrySet().stream()
+                            .map(entry -> new TopProduct(entry.getKey(), entry.getValue()))
+                            .collect(Collectors.toList())
+            );
+
+            TableColumn<TopProduct, String> productNameCol = new TableColumn<>("Product Name");
+            productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+            TableColumn<TopProduct, Integer> salesCol = new TableColumn<>("Sales");
+            salesCol.setCellValueFactory(new PropertyValueFactory<>("sales"));
+
+            topProductsTable.getColumns().addAll(productNameCol, salesCol);
+            topProductsTable.setItems(sortedTopProducts);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void handleBack(ActionEvent event) {
-        navigateTo(event, "/fxml/buyerseller.fxml", "Buyer/Seller Selection");
+        navigateTo(event, "/fxml/purchaseManage.fxml", "Buyer/Seller Selection");
     }
 
     @FXML
@@ -87,6 +225,62 @@ public class SellerController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    // Define the TopProduct class
+    public static class TopProduct {
+        private final String productName;
+        private final int sales;
+
+        public TopProduct(String productName, int sales) {
+            this.productName = productName;
+            this.sales = sales;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public int getSales() {
+            return sales;
+        }
+    }
+
+    // Define the RecentOrder class
+    public static class RecentOrder {
+        private final String orderId;
+        private final String customerName;
+        private final double amount;
+        private final String productName;
+        private final int quantity;
+
+        public RecentOrder(String orderId, String customerName, double amount, String productName, int quantity) {
+            this.orderId = orderId;
+            this.customerName = customerName;
+            this.amount = amount;
+            this.productName = productName;
+            this.quantity = quantity;
+        }
+
+        public String getOrderId() {
+            return orderId;
+        }
+
+        public String getCustomerName() {
+            return customerName;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public int getQuantity() {
+            return quantity;
         }
     }
 }
